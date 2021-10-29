@@ -1,0 +1,9 @@
+jupyter
+SciencePlots==1.0.9
+plotly
+matplotlib
+scikit-learn
+numpy
+pandas
+scipy
+spacy
