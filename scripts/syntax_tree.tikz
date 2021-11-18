@@ -1,0 +1,34 @@
+%
+\begin{forest}
+% Penn Treebank tagset
+% S Simple declarative clause
+% NNS noun, plural
+% VP verb phrase
+% V verb
+% VBP verb, non-3rd ps. sg. present
+% RB adverb
+% JJ adjective
+for tree={
+    if n children=0{
+    tier=terminal,
+    }{},
+}
+[S
+[NNS
+    [Transformers]
+]
+[VP
+    [V
+    [VBP
+    [are]
+    ]
+    ]
+]
+[RB
+    [quite]
+]
+[JJ
+    [amazing]
+]
+]
+\end{forest} 

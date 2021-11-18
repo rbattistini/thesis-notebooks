@@ -1,0 +1,46 @@
+%
+\tikzset{
+    zero color/.initial=white,
+    zero color/.get=\zerocol,
+    zero color/.store in=\zerocol,
+    one color/.initial=orange,
+    one color/.get=\onecol,
+    one color/.store in=\onecol,
+    two color/.initial=cyan,
+    two color/.get=\twocol,
+    two color/.store in=\twocol,
+    three color/.initial=green,
+    three color/.get=\threecol,
+    three color/.store in=\threecol,
+    pics/.cd,
+    cell/.style={
+        code={
+        \ifnum#1=2
+        \fill[\twocol!60](-0.5,-0.5) rectangle (0.5,0.5);
+        \fi
+        }
+    }
+} 
+
+\newcommand*{\ReadOutElement}[4]{%
+    \pgfplotstablegetelem{#2}{[index]#3}\of{#1}%
+    \let#4\pgfplotsretval
+}
+
+\pgfplotstableread{window_att.csv}{\windowatt}
+\pgfplotstablegetrowsof{\windowatt}
+\pgfmathtruncatemacro{\numrows}{\pgfplotsretval-1}
+\pgfplotstablegetcolsof{\windowatt}
+\pgfmathtruncatemacro{\numcols}{\pgfplotsretval-1}
+
+\begin{tikzpicture}
+    \foreach \X in {0,...,\numrows}
+    {
+    \foreach \Y in {0,...,\numcols}
+    {
+    \ReadOutElement{\windowatt}{\X}{\Y}{\Current}
+    \draw (\X-0.5,\Y-0.5) pic {cell=\Current};
+    }
+    }
+    \draw (-1,-1) grid (\numrows,\numcols);
+\end{tikzpicture}

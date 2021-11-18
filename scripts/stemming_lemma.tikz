@@ -1,0 +1,9 @@
+%
+\begin{tikzcd}
+                            & Stemming &       &  &                      & Lemmatization &        \\
+    change \arrow[rrdd]  &          &       &  & change \arrow[rrdd]  &               &        \\
+    changing \arrow[rrd] &          &       &  & changing \arrow[rrd] &               &        \\
+    changes \arrow[rr]   &          & chang &  & changes \arrow[rr]   &               & change \\
+    changed \arrow[rru]  &          &       &  & changed \arrow[rru]  &               &        \\
+    changer \arrow[rruu] &          &       &  & changer \arrow[rruu] &               &       
+\end{tikzcd} 

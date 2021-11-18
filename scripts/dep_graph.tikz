@@ -1,0 +1,12 @@
+% advmod: adverbial modifier 
+% acomp: adjectival complement 
+% nsubj: nominal subject
+\begin{dependency}[theme = simple]
+    \begin{deptext}[column sep=1.7em]
+    Transformers \& are \& quite \& amazing \\
+    \end{deptext}
+    \deproot{2}{root}
+    \depedge{2}{1}{nsubj}
+    \depedge{2}{4}{acomp}
+    \depedge{4}{3}{advmod}
+\end{dependency} 

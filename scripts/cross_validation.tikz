@@ -1,0 +1,36 @@
+% Adapted from: https://tex.stackexchange.com/questions/500368/trying-to-plot-cross-validation
+\usetikzlibrary{positioning,arrows.meta}
+\begin{tikzpicture}[node distance=0mm,minimum height=1cm,outer sep=3mm,scale=0.5
+		,>=Latex,font=\footnotesize,
+		indication/.style={minimum height=0cm,outer sep=0mm},
+		oneblock/.style={transform shape,minimum width=1cm,draw},
+	fullset/.style={transform shape,minimum width=10cm,draw}]
+	
+	% left part of picture
+	\node[fullset,anchor=west] at (0,0) (A) {};
+	\node[above=of A.north,indication] (ATXT) {Training set};
+	\node[oneblock,minimum width=2cm,anchor=west,right=of A,fill=lightgray,outer sep=0mm] (A1) {};
+	\path (ATXT) -| (A1) node[midway] {Validation set};
+	\node[fullset,anchor=west] at (0,-4) (B) {};
+	\foreach \x in {0,1,...,9}
+	{
+		\draw (B.west) +(\x,0) node[oneblock,anchor=west,draw] {};
+	}
+	\draw[->] (A) -- (B) node[midway,fill=white,indication] {divisione in 10 fold di uguale dimensione};
+	
+	% right part of picture
+	\begin{scope}[xshift=15cm,scale=0.5,local bounding box=rightside box]
+		\foreach \x in {0,1}
+		{
+			\foreach \y in {0,1,...,4}
+			{
+				\draw (\x*11,0) +(0,-\y*2) node[fullset,anchor=west] {};
+				\draw (\x*11,0) +(\x*5+\y,-\y*2) node[oneblock,draw,anchor=west,fill=lightgray] {};
+			}
+		}
+		\coordinate (R) at (rightside box.west);
+	\end{scope}
+	
+	% connecting arrow
+	\draw[->] (B.east) -- +(2.2,0) node[below,align=center,indication] {si eseguono 10\\cross validation\\con partizionamenti\\distinti} |- (R);
+\end{tikzpicture}
