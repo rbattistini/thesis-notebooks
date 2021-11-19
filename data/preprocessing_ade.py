@@ -5,7 +5,20 @@ import scispacy
 import pandas as pd
 from datasets import load_dataset
 
-# !{sys.executable} -m pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_core_sci_sm-0.4.0.tar.gz
+def spacy_tokenizer(sentence):
+    sentence = nlp(sentence)
+    tokens = [token.lemma_.lower() for token in sentence 
+          if token.is_stop == False 
+          and token.is_punct == False
+          and len(token.text) > 1
+          and token.is_ascii == True
+          and token.is_alpha == True
+          and token.is_quote == False
+          and token.is_space == False
+          and token.like_num == False
+          and token.like_url == False
+         ]
+    return tokens
 
 dataset = load_dataset('ade_corpus_v2', "Ade_corpus_v2_classification")
 df = pd.DataFrame(dataset["train"])
@@ -16,6 +29,8 @@ df = pd.DataFrame(dataset["train"])
 df = df.drop(columns=["indexes"])
 df.to_csv("ade_corpus.csv", index=None)
 
+# To download the pipeline
+# pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.4.0/en_core_sci_sm-0.4.0.tar.gz
 excluded = [
 #     "tok2vec",
 #     "tagger",
